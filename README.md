@@ -1,4 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+##Auth-Nextjs
+
+Implementing authentication with JWT tokens in Next.js involves several steps, including user registration, login, token generation, and verification. Additionally, implementing forgot password functionality typically involves sending a reset password email to the user. Here's a high-level overview of how you can implement these features:
+
+###User Registration:
+Create a registration form with fields like email and password.
+When the form is submitted, send a POST request to your server with the user's credentials.
+On the server, hash the password and save the user's details (including the hashed password) to your database.
+![User Registration](https://telegra.ph/file/8d5ceb36932a991e8f9f9.png)
+
+###User Login:
+Create a login form with fields for email and password.
+When the form is submitted, send a POST request to your server with the user's credentials.
+On the server, verify the user's credentials, and if they are correct, generate a JWT token.
+Send the JWT token back to the client and store it securely (e.g., in local storage or a cookie).
+![User Login](https://telegra.ph/file/462bb3b1ef210311f8694.png)
+
+###JWT Token Generation:
+Use a library like jsonwebtoken to generate JWT tokens on the server.
+Include the user's ID or other identifying information in the token payload.
+
+###JWT Token Verification:
+Create a middleware function to verify JWT tokens on protected routes.
+Extract the token from the request headers or cookies and verify it using the jsonwebtoken library.
+If the token is valid, allow access to the protected route; otherwise, return a 401 unauthorized error.
+
+###Forgot Password Functionality:
+Create a forgot password form where users can enter their email address.
+When the form is submitted, generate a unique reset token and store it in your database along with the user's ID and an expiration time.
+Send a reset password email to the user's email address with a link containing the reset token.
+When the user clicks the link, verify the reset token and allow them to reset their password.
+![Forgot Password](https://telegra.ph/file/59337a83a055b52f8935a.png)
+
+###Reset Password:
+Create a reset password form where users can enter a new password.
+When the form is submitted, verify the reset token and the user's ID.
+If the verification is successful, hash the new password and update the user's password in the database.
 
 ## Getting Started
 
@@ -16,9 +52,6 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
 
@@ -29,8 +62,3 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
